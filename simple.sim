@@ -1,0 +1,96 @@
+#WHAT:  a very simple example, with some options to try by removing the comment indicator (#)
+global begin
+
+setFertility poisson {{set_fertility_poisson}}
+setMaxOffspringNumber {{set_max_offspring_number}}
+
+prevalence relative {{prevalence_relative}}
+generations {{generations}}
+
+1.0 megabases per centiMorgan male
+1.0 megabases per centiMorgan female
+
+mutation rate 2.5 E -8.0 female
+mutation rate 2.5 E -8.0 male
+
+output {{output}}
+
+matingWithReplacement {{mating_with_replacement}}
+# The following is usually set to false unless you really want to constrict environmental variance 
+scaleEnvironmentNormalVariance true 0.001 0.1
+
+finalPedigreeDepth {{final_pedigree_depth}}
+
+# usingTrackSNPs true
+# outputXML true
+# outputSVG true
+# usingSpatial true 1000 1000 0.1 1.0
+
+event 530 outputXML
+event 500 serializeState
+
+# event 800 setPhenotypeSelection PopulationA PhenotypeA -8.8 3.8
+# event 910 setPhenotypeSelection PopulationA PhenotypeB -3.8 8.8
+
+end
+
+
+chromosome begin
+length 40000000
+
+gene begin
+name ABC1
+location 3000000
+length 25000
+gamma 1 0.05 1 0.05
+probabilityNoEffect 0.4
+probabilityPositiveEffect 0.3
+end
+
+gene begin
+name ABC2
+location 4000000
+length 25000
+gamma 1 0.05 1 0.05
+probabilityNoEffect 0.4
+probabilityPositiveEffect 0.3
+end
+
+gene begin
+name ABC3
+location 5000000
+length 25000
+gamma 1 0.05 1 0.05
+probabilityNoEffect 0.4
+probabilityPositiveEffect 0.3
+end
+
+end
+
+
+phenotype begin
+name PhenotypeA
+definition ABC1 + ABC3 
+end
+
+phenotype begin
+name PhenotypeB
+definition ABC2 
+end
+
+population begin
+name {{name}}
+birth {{birth}}
+initialSize {{initial_size}}
+carryingCapacity {{carrying_capacity}}
+growthRate {{growth_rate}}
+death {{death}}
+selection PhenotypeA relative -4.8 4.8
+environmentNormal PhenotypeA 0.0 1.0
+mateCutoff internal PhenotypeA -4.8 4.8
+mateCutoff external PhenotypeA -4.8 4.8
+selection PhenotypeB relative -4.8 4.8
+environmentNormal PhenotypeB 0.0 1.0
+mateCutoff internal PhenotypeB -4.8 4.8
+mateCutoff external PhenotypeB -4.8 4.8
+end

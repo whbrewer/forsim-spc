@@ -1,0 +1,1 @@
+{"category": "", "name": "forsim", "input_format": "ini", "language": "", "command": "../../../../apps/forsim/forsim", "postprocess": "", "preprocess": "simple.sim", "plots": [], "description": "A tool for exploring the genetic architecture of complex traits with controlled truth"}
