@@ -1,0 +1,32 @@
+global:
+  set_fertility_poisson: 2.5
+  set_max_offspring_number: 4
+  prevalence_relative: 0.08
+  generations: 1000
+  mutation_rate_male: 2.5e-8
+  mutation_rate_female: 2.5e-8
+  output: 500
+  megabases_per_centimorgan_male: 1.0
+  megabases_per_centimorgan_female: 1.0
+  mating_with_replacement: true
+  final_pedigree_depth: 3
+  using_track_snps: true
+  output_xml: true
+  output_svg: true
+
+population:
+    - name: PopulationA
+      birth: 0
+      initial_size: 1000
+      carrying_capacity: 3000
+      growth_rate: 0.525
+      death: 20000
+
+chromosome:
+    - length: 4000000
+      gene:
+        - name: ABC1
+          location: 100000
+          gamma: [1, 0.05, 1, 0.01]
+          probabilityNoEffect: 0.6
+          probabilityPositiveEffect: 0.3
