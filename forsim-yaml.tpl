@@ -52,7 +52,8 @@
 		<label for="generations" class="control-label col-xs-6">
 			generations:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="generations" value="{{generations}}"/>
+			<input type="number" class="form-control" name="generations"
+			       value="{{generations}}" onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -68,7 +69,7 @@
 		<label for="set_max_offspring_number" class="control-label col-xs-6">
 			set_max_offspring_number:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="set_max_offspring_number" value="{{set_max_offspring_number}}"/>
+			<input type="number" class="form-control" name="set_max_offspring_number" value="{{set_max_offspring_number}}"  onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -76,7 +77,7 @@
 		<label for="prevalence_relative" class="control-label col-xs-6">
 			prevalence_relative:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="prevalence_relative" value="{{prevalence_relative}}"/>
+			<input type="number" class="form-control" name="prevalence_relative" value="{{prevalence_relative}}" onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -84,7 +85,7 @@
 		<label for="mutation_rate_male" class="control-label col-xs-6">
 			mutation_rate_male:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="mutation_rate_male" value="{{mutation_rate_male}}"/>
+			<input type="text" class="form-control" name="mutation_rate_male" value="{{mutation_rate_male}}" onblur="correctSciNotation(this); updateScript()" />
 		</div>
 	</div>
 
@@ -92,7 +93,7 @@
 		<label for="mutation_rate_female" class="control-label col-xs-6">
 			mutation_rate_female:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="mutation_rate_female" value="{{mutation_rate_female}}"/>
+			<input type="text" class="form-control" name="mutation_rate_female" value="{{mutation_rate_female}}" onblur="correctSciNotation(this); updateScript()"/>
 		</div>
 	</div>
 
@@ -100,7 +101,8 @@
 		<label for="output" class="control-label col-xs-6">
 			output:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="output" value="{{output}}"/>
+			<input type="number" class="form-control" name="output"
+			       value="{{output}}"  onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -108,7 +110,8 @@
 		<label for="megabases_per_centimorgan_male" class="control-label col-xs-6">
 			megabases_per_centimorgan_male:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="megabases_per_centimorgan_male" value="{{megabases_per_centimorgan_male}}"/>
+			<input type="number" class="form-control" name="megabases_per_centimorgan_male"
+			       value="{{megabases_per_centimorgan_male}}"  onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -116,7 +119,7 @@
 		<label for="megabases_per_centimorgan_female" class="control-label col-xs-6">
 			megabases_per_centimorgan_female:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="megabases_per_centimorgan_female" value="{{megabases_per_centimorgan_female}}"/>
+			<input type="number" class="form-control" name="megabases_per_centimorgan_female" value="{{megabases_per_centimorgan_female}}" onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -124,7 +127,7 @@
 		<label for="mating_with_replacement" class="control-label col-xs-6">
 			mating_with_replacement:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="checkbox" name="mating_with_replacement" value="true"
+			<input type="checkbox" name="mating_with_replacement" value="true"  onclick="updateScript()"
 				%if mating_with_replacement== '':
 					checked
 				%end
@@ -136,7 +139,7 @@
 		<label for="final_pedigree_depth" class="control-label col-xs-6">
 			final_pedigree_depth:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="number" class="form-control" name="final_pedigree_depth" value="{{final_pedigree_depth}}"/>
+			<input type="number" class="form-control" name="final_pedigree_depth" value="{{final_pedigree_depth}}" onchange="updateScript()"/>
 		</div>
 	</div>
 
@@ -145,6 +148,7 @@
 			using_track_snps:</label>
 		<div class="col-xs-12 col-sm-6">
 			<input type="checkbox" name="using_track_snps" value="true"
+			       onclick="updateScript()"
 				%if using_track_snps== '':
 					checked
 				%end
@@ -156,7 +160,7 @@
 		<label for="output_xml" class="control-label col-xs-6">
 			output_xml:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="checkbox" name="output_xml" value="true"
+			<input type="checkbox" name="output_xml" value="true" onclick="updateScript()"
 				%if output_xml== '':
 					checked
 				%end
@@ -168,7 +172,7 @@
 		<label for="output_svg" class="control-label col-xs-6">
 			output_svg:</label>
 		<div class="col-xs-12 col-sm-6">
-			<input type="checkbox" name="output_svg" value="true"
+			<input type="checkbox" name="output_svg" value="true" onclick="updateScript()"
 				%if output_svg== '':
 					checked
 				%end
@@ -212,10 +216,23 @@
 
 <div role="tabpanel" class="tab-pane fade in inactive" id="script">
 
+<a class="btn btn-default" onclick="updateScript()">Generate Script</a>
+
 <textarea id="input_script" style="font-family:monospace" class="form-control" name="script" rows="20"></textarea>
 
 </div>
 
 </div>
 </form>
+
+<script>
+$(document).ready(function() {
+  addChromosome()
+  addGene(chrom1)
+  addPhenotype()
+  addPopulation()
+  updateScript()
+})
+</script>
+
 %include('footer')

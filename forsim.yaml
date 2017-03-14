@@ -3,8 +3,8 @@ basic:
   set_max_offspring_number: 4
   prevalence_relative: 0.08
   generations: 1000
-  mutation_rate_male: 2.5e-8
-  mutation_rate_female: 2.5e-8
+  mutation_rate_male: '2.5 E -8'
+  mutation_rate_female: '2.5 E -8'
   output: 500
   megabases_per_centimorgan_male: 1.0
   megabases_per_centimorgan_female: 1.0
