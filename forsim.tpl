@@ -33,6 +33,9 @@
 		<a href="#global" aria-controls="home" role="tab" data-toggle="tab">global</a>
 	</li>
 	<li role="presentation">
+		<a href="#events" aria-controls="home" role="tab" data-toggle="tab">events</a>
+	</li>
+	<li role="presentation">
 		<a href="#chromosome" aria-controls="home" role="tab" data-toggle="tab">chromosome</a>
 	</li>
 	<li role="presentation">
@@ -179,6 +182,40 @@
 			/>
 		</div>
 	</div>
+
+</div>
+
+<div role="tabpanel" class="tab-pane fade in inactive" id="events">
+
+	<div class="form-group">
+		<label class="control-label col-xs-3" for="generation">Generation:</label>
+		<div class="col-xs-3">
+			<input class="form-control" type="text" id="generation" value="100" />
+		</div>
+		<div class="col-xs-3">
+			<select id="evnt" class="form-control">
+				<option value='printGeneration'>printGeneration</option>
+				<option value='donateParents'>donateParents</option>
+				<option value='mutation'>mutation</option>
+				<option value='serializeState'>serializeState</option>
+				<option value='setCarryingCapacity'>setCarryingCapacity</option>
+				<option value='setEnvironmentNormal'>setEnvironmentNormal</option>
+				<option value='setFertility'>setFertility</option>
+				<option value='setMatingPopMatrix'>setMatingPopMatrix</option>
+				<option value='setMaxOffspringNumber'>setMaxOffspringNumber</option>
+				<option value='setPhenotypeSelection'>setPhenotypeSelection</option>
+			</select>
+		</div>
+		<div class="col-xs-3">
+			<a class="btn btn-default" onclick="addEvent()">Add Event</a>
+		</div>
+	</div>
+	<hr />
+	<h2>Events</h2>
+
+	<label class="control-label" style="width:150px; text-align:center; margin:5px">generation</label>
+	<label class="control-label" style="width:300px; text-align:center; margin:5px">event</label>
+	<label class="control-label" style="width:400px; text-align:center; margin:5px">arguments</label>
 
 </div>
 

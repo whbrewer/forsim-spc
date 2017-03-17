@@ -2,9 +2,47 @@ var count = 0
 var gene_count = 0
 var chrom_count = 0
 var pheno_count = 0
+var event_count = 0
 
 function correctSciNotation(obj) {
     obj.value = obj.value.replace(/[eE]/, " E ")
+}
+
+function addEvent() {
+    event_count += 1
+
+    var newdiv = document.createElement("div")
+    newdiv.id = 'event' + event_count
+    newdiv.className = 'form-group'
+    newdiv.style = 'margin:5px'
+    var gen = document.getElementById('generation').value
+
+    var e = document.getElementById("evnt")
+    var evnt = e.options[e.selectedIndex].value
+
+    var arg = {};
+
+    arg.serializeState = ""
+    arg.printGeneration = ""
+    arg.mutation = "2.5 E -08"
+    arg.donateParents = "PopulationA PopulationB 250 250"
+    arg.outputXML = "true"
+    arg.setCarryingCapacity = "PopulationA 3000"
+    arg.setEnvironmentNormal = "PopulationA pheno1 mean variance"
+    arg.setFertility = "PopulationA poisson mean"
+    arg.setMatingPopMatrix = "PopulationA 95 5 0"
+    arg.setMaxOffspringNumber = "PopulationA 8"
+    arg.setPhenotypeSelection = "PopulationA pheno1 relative -1.0 2.5"
+
+    eid = 'event' + event_count
+    newdiv.appendChild(createInput(eid+'gen', 'number', gen))
+    newdiv.appendChild(createInput(eid+'action', 'text', evnt, 'width:300px;margin:5px'))
+    if (arg[evnt]) {
+        newdiv.appendChild(createInput(eid+'args', 'text', arg[evnt], 'width:400px;margin:5px'))
+    }
+
+    var mydiv = document.getElementById("events")
+    mydiv.appendChild(newdiv)
 }
 
 function addPopulation() {
@@ -51,17 +89,10 @@ function addPhenotype() {
     newdiv.className = 'form-group'
     newdiv.style = 'margin:5px'
 
-    console.log(pheno_count)
+    // console.log(pheno_count)
 
     newdiv.appendChild(createInput('pheno_name', 'text', 'pheno' + pheno_count))
-    newdiv.appendChild(createInput('pheno_def', 'text', 'ABC1 + ABC2 * ifMale + 0.3 * ifFemale', 'width:600px; margin:5px'))
-
-    // if (pheno_count % 2 == 0) {
-    //     newdiv.appendChild(createInput('pheno_def', 'text', 'ABC1 + ABC2 * ifMale + 0.3 * ifFemale', 'width:600px; margin:5px'))
-    // } else {
-    //     // (3.0 * ABC1) + ((ABC2 / 2.0) / 2.0) # * environment + 2.0 * familyEnvironment
-    //     newdiv.appendChild(createInput('pheno_def', 'text', 'ABC1', 'width:600px; margin:5px'))
-    // }
+    newdiv.appendChild(createInput('pheno_def', 'text', 'ABC1', 'width:600px; margin:5px'))
 
     var mydiv = document.getElementById("phenotype")
     mydiv.appendChild(newdiv)
@@ -142,13 +173,29 @@ function updateScript() {
     if (form.output_svg.checked) {
         buf += "outputSVG true " + lb
     }
+
+    // events
+    var events = $('#events').children('div')
+
+    for( i=1; i< events.length; i++ )
+    {
+        var evnt = events[i]
+        buf += "event"
+        var event_inputs = $('#'+evnt.id).children('div > input')
+        for (k = 0; k < event_inputs.length; k++) {
+            char = event_inputs[k]
+            buf += " " + char.value
+        }
+        buf += lb
+    }
+
     buf += "end" + lb + lb
 
     var chromosomes = $('#chromosome').children('div')
 
     for( i=0; i< chromosomes.length; i++ )
     {
-     var chromosome = chromosomes[i];
+     var chromosome = chromosomes[i]
      // console.log(chromosome)
      // chromosome
      buf += "chromosome begin" + lb
@@ -185,7 +232,7 @@ function updateScript() {
     {
         buf += "phenotype begin" + lb
         var pheno = phenotypes[i];
-        console.log(pheno)
+        // console.log(pheno)
         var pheno_inputs = $('#'+pheno.id).children('input')
         for (k = 0; k < pheno_inputs.length; k++) {
             char = pheno_inputs[k]
