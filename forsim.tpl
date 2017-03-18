@@ -102,7 +102,7 @@
 
 	<div class="form-group">
 		<label for="output" class="control-label col-xs-6">
-			output:</label>
+			<a data-toggle="popover" data-content="specify the frequency to dump output files in terms of number of generations">output:</a></label>
 		<div class="col-xs-12 col-sm-6">
 			<input type="number" class="form-control" name="output"
 			       value="{{output}}"  onchange="updateScript()"/>
@@ -173,7 +173,7 @@
 
 	<div class="form-group">
 		<label for="output_svg" class="control-label col-xs-6">
-			output_svg:</label>
+			<a data-toggle="popover" data-content="output an SVG image file">output_svg:</a></label>
 		<div class="col-xs-12 col-sm-6">
 			<input type="checkbox" name="output_svg" value="true" onclick="updateScript()"
 				%if output_svg== '':
@@ -234,6 +234,18 @@
 <div role="tabpanel" class="tab-pane fade in inactive" id="phenotype">
 
 	<a class="btn btn-default" onclick="addPhenotype()">Add Phenotype</a><br />
+
+	<h2>examples:</h2>
+
+	<ul>
+		<li> ABC1 + ABC2 * ifMale + 0.3 * ifFemale</li>
+		<li> (3.0 * ABC1) + ((ABC2 / 2.0) / 2.0) # * environment + 2.0 *
+familyEnvironment </li>
+		<li> G1 * 2.0 + G2 + G3 * ( G4 + G5 ) </li>
+		<li> G1 * ifMale + 2.0 * G1 * G2 * ifFemale </li>
+		<li> G1 + G3 * ( environment – familyEnvironment ) </li>
+	</ul>
+
 	<label class="control-label" style="width:150px; text-align:center; margin:5px">name</label>
 	<label class="control-label" style="width:150px; text-align:center; margin:5px">definition</label>
 
@@ -272,7 +284,11 @@ $(document).ready(function() {
   addPhenotype()
   addPopulation()
   updateScript()
+  $('[data-toggle="popover"]').popover();
 })
+
+$('[data-toggle="popover"]').popover({ container: 'body' })
+
 </script>
 
 %include('footer')
