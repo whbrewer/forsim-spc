@@ -257,10 +257,12 @@ function updateScript() {
         buf += "environmentNormal PhenotypeA 0.0 1.0" + lb
         buf += "mateCutoff internal PhenotypeA -4.8 4.8" + lb
         buf += "mateCutoff external PhenotypeA -4.8 4.8" + lb
-        // buf += "selection PhenotypeB relative -4.8 4.8" + lb
-        // buf += "environmentNormal PhenotypeB 0.0 1.0" + lb
-        // buf += "mateCutoff internal PhenotypeB -4.8 4.8" + lb
-        // buf += "mateCutoff external PhenotypeB -4.8 4.8" + lb
+        if (populations.length > 1) {
+            buf += "selection PhenotypeB relative -4.8 4.8" + lb
+            buf += "environmentNormal PhenotypeB 0.0 1.0" + lb
+            buf += "mateCutoff internal PhenotypeB -4.8 4.8" + lb
+            buf += "mateCutoff external PhenotypeB -4.8 4.8" + lb
+        }
         buf += "end" + lb + lb
     }
 
